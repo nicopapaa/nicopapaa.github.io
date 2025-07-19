@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
@@ -14,45 +14,73 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 	<!--Imagen principal-->
-
-	<div class="d-flex flex-column justify-content-center align-items-center text-center" style="height: 100vh; background-color: white; color: #333;"></div>
-
-	  </div>
+	<div class="container-fluid p-0" style="background-color: white;">
+		<img src="img/invitacion_online1.jpg" alt="Invitación" class="img-full">
+	</div>
 
 	<!--Contador-->
-	<div class="contenedor flex-column justify-content-center align-items-center text-center" style="height: 100vh; background-color: #FC89CC; color: #333; height: 30%;">
-		
-		<h1 class="mb-3" style="margin:20px;">10 DE ENERO DE 2026</h1>
-		<h4 class="mb-4">Se acerca mi noche…</h4>
-		<h5 class="mb-2">FALTAN…</h5>
-		<div id="contador" class="d-flex gap-4 mt-6 flex-wrap justify-content-center">
-			<div class="reloj-item">
-			  <span id="dias"></span>
-			  <p>Dias</p>
+	<div class="container-fluid rose">
+		<div class="container text-center">
+		  <div class="row">
+			<div class="col-md-6 mx-auto">
+			  <!-- Tu contenido centrado -->
+			  	<h1>27 DE DICIEMBRE DE 2025</h1>
+				<h4>Se acerca mi noche…</h4>
+				<h5>FALTAN…</h5>
+				<!-- Reloj -->
+
+				<div class="container text-center style-contador">
+					<div class="row justify-content-center">
+					  <div class="col-3">
+						<span id="dias"></span>
+						<p>Días</p>
+					  </div>
+					  <div class="col-3">
+						<span id="horas"></span>
+						<p>Horas</p>
+					  </div>
+					  <div class="col-3">
+						<span id="minutos"></span>
+						<p>Minutos</p>
+					  </div>
+					  <div class="col-3">
+						<span id="segundos"></span>
+						<p>Segundos</p>
+					  </div>
+					</div>
+				</div>
+				  
 			</div>
-			<div class="reloj-item">
-			  <span id="horas"></span>
-			  <p>Horas</p>
-			</div>
-			<div class="reloj-item">
-			  <span id="minutos"></span>
-			  <p>Minutos</p>
-			</div>
-			<div class="reloj-item">
-			  <span id="segundos"></span>
-			  <p>Segundos</p>
-			</div>
+		  </div>
 		</div>
-		<svg viewBox="0 0 100 20" preserveAspectRatio="none" class="curva-inferior">
-			<path d="M0,0 C50,20 50,20 100,0 L100,20 L0,20 Z" fill="white" />
-		  </svg>
-	  </div>
+	</div>
 
 
-	  <div class="d-flex flex-column justify-content-center align-items-center text-center" style="height: 100vh; background-color: white; color: #333;"></div>
 
-	  </div>
-	  
+	<!--Contador-->
+	<div class="container-fluid rose">
+		<div class="container text-center">
+		  <div class="row">
+			<div class="col-md-6 mx-auto">
+			  <!-- Tu contenido centrado -->
+			  <h4 class="mb-4">FIESTA</h4>
+			  <h4 class="mb-4">Janos's Caballito</h4>
+			  <h4 class="mb-4">Av. 44 esq. 30, La Plata</h4>
+			  <h4 class="mb-4">21:30</h4>
+			  <a href="https://maps.app.goo.gl/uMTYkjfq72qdWgkE7" target="_blank" class="boton-mapa">
+				  ¿Cómo llegar?
+			  </a>  
+				  
+			</div>
+		  </div>
+		</div>
+	</div>
+
+
+	
+
+	
+
 	  <script>
 		const fechaEvento = new Date('2025-12-27T21:00:00').getTime();
 	  
@@ -75,10 +103,30 @@
 	  
 	  
 	  <style>
+
+.img-full {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+
+		.style-contador{
+			color:white;
+			font-size: 3rem;
+		}
+
+
 		body {
-			background-color: #FC89CC;
+			background-color: white;
 			font-family: 'Segoe UI', sans-serif;
 		}
+
+		.rose {
+			background-color: #FC89CC;
+		}
+
 		.titulo {
 			text-align: center;
 			padding: 40px;
@@ -109,26 +157,55 @@
 		}
 
 		.contenedor {
-  position: relative;
-  overflow: hidden;
-}
-.curva-svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-}
-.contenido {
-  background-color: #ffe4e1;
-  padding: 40px;
-}
+		position: relative;
+		overflow: hidden;
+		}
+		.curva-svg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 60px;
+		}
+		.contenido {
+		background-color: #ffe4e1;
+		padding: 40px;
+		}
 
-.curva-inferior {
-  display: block;
-  width: 100%;
-  height: 60px;
-}
+		.curva-inferior {
+		display: block;
+		width: 100%;
+		height: 60px;
+		}
+
+		.btn-rosa {
+		border: 2px solid #ffb6c1;
+		color: #ffb6c1;
+		background-color: transparent;
+		}
+		.btn-rosa:hover {
+		background-color: #ffb6c1;
+		color: white;
+		}
+
+		a.boton-mapa {
+		display: inline-block;
+		padding: 12px 24px;
+		font-size: 1rem;
+		font-weight: 500;
+		text-decoration: none;
+		border: 2px solid #FC89CC; /* Rosa Bootstrap */
+		color: #FC89CC;
+		border-radius: 8px;
+		transition: all 0.3s ease;
+		background-color: transparent;
+		}
+
+		a.boton-mapa:hover {
+		background-color: #FC89CC;
+		color: white;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+		}
 
 
 	  </style>
