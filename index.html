@@ -14,11 +14,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 	<!--Audio-->
-	<audio id="cancion" autoplay loop>
+	<audio id="cancion" loop>
 		<source src="audio/tu_cancion.mp3" type="audio/mp3">
-		Tu navegador no soporta audio.
 	  </audio>
 	  <button id="botonAudio" class="btn-audio">⏸️</button>
+	  
+
 	  
 
 	<!--Imagen principal-->
@@ -257,9 +258,17 @@
 		});
 	  </script>
 	  
+	  <script>
+		document.addEventListener('click', function () {
+		  const audio = document.getElementById('cancion');
+		  audio.play();
+		}, { once: true }); // solo se ejecuta una vez
+	  </script>
 	  
 	  
 	  <style>
+
+		
 
 
 .colores-prohibidos {
