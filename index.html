@@ -13,72 +13,214 @@
 	<!-- Bootstrap JS (incluye Popper para tooltips y dropdowns) -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
+	<!--Audio-->
+	<audio id="cancion" autoplay loop>
+		<source src="audio/tu_cancion.mp3" type="audio/mp3">
+		Tu navegador no soporta audio.
+	  </audio>
+	  <button id="botonAudio" class="btn-audio">⏸️</button>
+	  
+
 	<!--Imagen principal-->
-	<div class="container-fluid p-0" style="background-color: white;">
-		<img src="img/invitacion_online1.jpg" alt="Invitación" class="img-full">
+	<div class="container-fluid p-0">
+		<picture>
+		  <!-- Imagen para pantallas grandes (Desktop) -->
+		  <source media="(min-width: 768px)" srcset="img/invitacion_online1.jpg">
+		  <!-- Imagen para móviles (Mobile) -->
+			<img src="img/pagina web_MOBILE.jpg" alt="Invitación" class="img-fluid fullscreen-img">
+		</picture>
 	</div>
+	  
+	  
 
 	<!--Contador-->
 	<div class="container-fluid rose">
 		<div class="container text-center">
-		  <div class="row">
-			<div class="col-md-6 mx-auto">
-			  <!-- Tu contenido centrado -->
-			  	<h1>27 DE DICIEMBRE DE 2025</h1>
-				<h4>Se acerca mi noche…</h4>
-				<h5>FALTAN…</h5>
-				<!-- Reloj -->
+			<div class="row">
+				<div class="col-md-6 mx-auto" style="padding: 20px;">
+				<!-- Tu contenido centrado -->
+					<h1>27 DE DICIEMBRE DE 2025</h1>
+					<h4>Se acerca mi noche…</h4>
+					<h5>FALTAN…</h5>
+					<!-- Reloj -->
 
-				<div class="container text-center style-contador">
-					<div class="row justify-content-center">
-					  <div class="col-3">
-						<span id="dias"></span>
-						<p>Días</p>
-					  </div>
-					  <div class="col-3">
-						<span id="horas"></span>
-						<p>Horas</p>
-					  </div>
-					  <div class="col-3">
-						<span id="minutos"></span>
-						<p>Minutos</p>
-					  </div>
-					  <div class="col-3">
-						<span id="segundos"></span>
-						<p>Segundos</p>
-					  </div>
-					</div>
+					<div class="container text-center style-contador">
+						<div class="row justify-content-center">
+						<div class="col-3">
+							<span id="dias"></span>
+							<p class="style-contador-letter">Días</p>
+						</div>
+						<div class="col-3">
+							<span id="horas"></span>
+							<p class="style-contador-letter">Horas</p>
+						</div>
+						<div class="col-3">
+							<span id="minutos"></span>
+							<p class="style-contador-letter">Minutos</p>
+						</div>
+						<div class="col-3">
+							<span id="segundos"></span>
+							<p class="style-contador-letter">Segundos</p>
+						</div>
+						</div>
+					</div>  
 				</div>
-				  
 			</div>
-		  </div>
-		</div>
+
+			<!--Mensaje-->
+			<div class="row" style="padding: 40px; font-family: Allura;">
+				<div class="col-md-12 mx-auto">
+					<!-- Tu contenido centrado -->
+					<h5 style="font-size:2rem !important;">Porque esta noche es muy importante para mi, quiero</h5>
+					<h5 style="font-size:2rem !important;">compartirla con las personas que llevo en el corazón.</h5>
+					<h5 style="font-size:2rem !important;">Porque sos una de ellas, quisiera que estés presente en</h5>
+					<h5 style="font-size:2rem !important;">una de las noches mas inolvidables de mi vida.</h5>	
+				</div>
+			</div>
+		</div>	
+	</div>
+	<!-- Curva decorativa como cierre -->
+	<div class="curva-svg-wrapper">
+		<svg viewBox="0 0 100 20" preserveAspectRatio="none" class="curva-svg">
+			<path d="M0,20 C50,0 50,0 100,20 L100,0 L0,0 Z" fill="#A56C6C" />
+		</svg>
 	</div>
 
-
-
-	<!--Contador-->
-	<div class="container-fluid rose">
-		<div class="container text-center">
-		  <div class="row">
-			<div class="col-md-6 mx-auto">
-			  <!-- Tu contenido centrado -->
-			  <h4 class="mb-4">FIESTA</h4>
-			  <h4 class="mb-4">Janos's Caballito</h4>
-			  <h4 class="mb-4">Av. 44 esq. 30, La Plata</h4>
-			  <h4 class="mb-4">21:30</h4>
-			  <a href="https://maps.app.goo.gl/uMTYkjfq72qdWgkE7" target="_blank" class="boton-mapa">
-				  ¿Cómo llegar?
-			  </a>  
-				  
+	<!--Fotos-->
+	<div class="col-md-8 mx-auto" style="margin: 100px;">
+		<div id="carouselExample" class="carousel slide">
+			<div class="carousel-inner">
+			<div class="carousel-item active">
+				<div class="row">
+				<div class="col-4">
+					<img src="img/person/carousel1.jpeg" class="d-block w-100" alt="Foto 1">
+				</div>
+				<div class="col-4">
+					<img src="img/person/carousel2.jpeg" class="d-block w-100" alt="Foto 2">
+				</div>
+				<div class="col-4">
+					<img src="img/person/carousel3.jpeg" class="d-block w-100" alt="Foto 3">
+				</div>
+				</div>
 			</div>
-		  </div>
+			<div class="carousel-item">
+				<div class="row">
+				<div class="col-4">
+					<img src="img/person/carousel1.jpeg" class="d-block w-100" alt="Foto 4">
+				</div>
+				</div>
+			</div>
+			<!-- Agregá más items de a pares si querés -->
+			</div>
+		
+			<!-- controles -->
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Anterior</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Siguiente</span>
+			</button>
 		</div>
 	</div>
+	  
 
 
-	
 
+		<!--Destino-->
+		<div class="container-fluid" style="padding: 20px;">
+			<div class="container text-center">
+			  <div class="row">
+				<div class="col-md-6 mx-auto">
+				  <!-- Tu contenido centrado -->
+				  <img src="gif/gif_globos.gif" alt="Gif animado" class="img-fluid" width="150" height="150"/>
+				  <h4 class="mb-4">¡FIESTA!</h4>
+				  <h4 class="mb-4">San cayetano</h4>
+				  <h4 class="mb-4">Av. 44 esq. 30, La Plata</h4>
+				  <h4 class="mb-4">21:30</h4>
+				  <a href="https://maps.app.goo.gl/uMTYkjfq72qdWgkE7" target="_blank" class="boton-mapa">
+					  ¿Cómo llegar?
+				  </a>  
+					  
+				</div>
+			  </div>
+			</div>
+		</div>
+
+		<div class="container-fluid rose2" style="padding: 30px;">
+			<div class="container text-center">
+				<div class="row">
+					<h1 style="font-family: Allura;">Te cuento</h1>
+					<h1 style="font-family: Allura;">todos los detalles...</h1>
+					<div class="accordion accordion-flush" id="accordionFlushExample">
+						<div class="accordion-item">
+						  <h2 class="accordion-header">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+							  ¿Qué me pongo?
+							</button>
+						  </h2>
+						  <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+							<div class="accordion-body">
+								<p>El dress code es: <b>elegante.</b></p>
+								<div class="container text-center">
+									<div class="row">
+										<div class="col-md-6 mx-auto colores-prohibidos">
+											<div class="color-circle negro"></div>
+											<div class="color-circle blanco"></div>
+											<div class="color-circle rojo"></div>
+										</div>
+										<p class="nota">*Por favor, evitar estos colores en la vestimenta.</p>
+									</div>
+								</div>
+							</div>
+						  </div>
+						</div>
+						<div class="accordion-item">
+						  <h2 class="accordion-header">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+							  Si quieres regalarme algo
+							</button>
+						  </h2>
+						  <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+							<div class="accordion-body">
+								<p>El mejor regalo es tu presencia,
+									pero si deseas regalarme algo…</p>
+								
+								<p>DATOS BANCARIOS</p>
+								<p>Nombre del Titular: xxxxxxxxxxxxxxxx</p>
+								<p>CVU: xxxxxxxxxxxxxxxx</p>
+								<p>Alias: xxxxxxxxxxxxxxxx</p>
+								
+								<p>En el salón también habrá un buzón.</p>
+							</div>
+						  </div>
+						</div>
+					  </div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<!--Destino-->
+		<div class="container-fluid" style="padding: 20px;">
+			<div class="container text-center">
+			  <div class="row">
+				<div class="col-md-6 mx-auto">
+				  <!-- Tu contenido centrado -->
+				  <img src="gif/gif_musica.gif" alt="Gif animado" class="img-fluid" width="150" height="150"/>
+				  <h1 class="mb-4" style="font-family: Allura;" >¡Hagamos juntos una fiesta inolvidable!</h1>
+				  <h4 class="mb-4">Ayudame a armar la lista de canciones</h4>
+				  <a target="" class="boton-mapa">
+					  Agrega tu tema
+				  </a>  
+					  
+				</div>
+			  </div>
+			</div>
+		</div>
 	
 
 	  <script>
@@ -100,23 +242,149 @@
 		}, 1000);
 	  </script>
 	  
+	  <script>
+		const audio = document.getElementById("cancion");
+		const boton = document.getElementById("botonAudio");
+	  
+		boton.addEventListener("click", () => {
+		  if (audio.paused) {
+			audio.play();
+			boton.textContent = "⏸️";
+		  } else {
+			audio.pause();
+			boton.textContent = "▶️";
+		  }
+		});
+	  </script>
+	  
 	  
 	  
 	  <style>
 
-.img-full {
+
+.colores-prohibidos {
+  display: flex;
+  justify-content: center; /* centra horizontalmente */
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.color-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+/* Colores prohibidos */
+.negro {
+  background-color: #A66CB9;
+}
+
+.blanco {
+  background-color: white;
+  border: 2px solid gray; /* para que se vea sobre fondo blanco */
+}
+
+.rojo {
+  background-color: #FB53A0;
+}
+
+
+
+.accordion-flush .accordion-item {
+  border-bottom: 2px solid white; /* pinta solo el borde inferior */
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: #C38888; /* si querés mantener el fondo rosa oscuro */
+  color: white;
+}
+
+.accordion-button {
+  background-color: #C38888;
+  color: white;
+  box-shadow: none;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #C38888;
+  color: white;
+  box-shadow: none;
+}
+
+.accordion-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.accordion-button::after {
+  filter: invert(1); /* invierte el color para que se vea blanca */
+}
+
+
+
+.btn-audio {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #A56C6C;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+.carousel-item img {
+	height: 600px;
+	object-fit: cover;
+	border-radius: 30px;
+}
+
+
+.bg-pink {
+  background-color: white;
+}
+
+
+.curva-svg-wrapper {
   width: 100%;
-  height: auto;
-  object-fit: cover;
+  height: 60px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.curva-svg {
+  width: 100%;
+  height: 100%;
   display: block;
 }
 
+
+
+		.fullscreen-img {
+		width: 100%;
+		height: 100vh;
+		object-fit: cover;
+		display: block;
+		}
 
 		.style-contador{
 			color:white;
 			font-size: 3rem;
 		}
 
+		.style-contador-letter{
+			color:white;
+			font-size: 1rem;
+		}
 
 		body {
 			background-color: white;
@@ -124,15 +392,21 @@
 		}
 
 		.rose {
-			background-color: #FC89CC;
+			background-color: #A56C6C;
+			color:white;
 		}
+		.rose2 {
+			background-color: #C38888;
+			color:white;
+		}
+		
 
 		.titulo {
 			text-align: center;
 			padding: 40px;
 		}
 		body {
-			font-family: 'Allura', cursive;
+			font-family: 'QUICKSAND', light;
 		}
 
 		.reloj-item {
@@ -160,22 +434,9 @@
 		position: relative;
 		overflow: hidden;
 		}
-		.curva-svg {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 60px;
-		}
 		.contenido {
 		background-color: #ffe4e1;
 		padding: 40px;
-		}
-
-		.curva-inferior {
-		display: block;
-		width: 100%;
-		height: 60px;
 		}
 
 		.btn-rosa {
@@ -194,15 +455,15 @@
 		font-size: 1rem;
 		font-weight: 500;
 		text-decoration: none;
-		border: 2px solid #FC89CC; /* Rosa Bootstrap */
-		color: #FC89CC;
+		border: 2px solid #F3B6B6; /* Rosa Bootstrap */
+		color: #F3B6B6;
 		border-radius: 8px;
 		transition: all 0.3s ease;
 		background-color: transparent;
 		}
 
 		a.boton-mapa:hover {
-		background-color: #FC89CC;
+		background-color: #F3B6B6;
 		color: white;
 		box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 		}
