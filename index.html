@@ -7,19 +7,92 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 
+	<script type="module" src="https://unpkg.com/ionicons@6.0.3/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@6.0.3/dist/ionicons/ionicons.js"></script>
+
+
 	<title>Invitacion cumple</title>
 </head>
 <body>
 	<!-- Bootstrap JS (incluye Popper para tooltips y dropdowns) -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
-	<!--Audio-->
-	<audio id="cancion" loop>
-		<source src="audio/tu_cancion.mp3" type="audio/mp3">
-	  </audio>
-	  <button id="botonAudio" class="btn-audio">⏸️</button>
-	  
-
+<!-- Audio -->
+<audio id="cancion" autoplay loop>
+	<source src="audio/tu_cancion.mp3" type="audio/mp3">
+  </audio>
+  
+  <!-- Ícono control de audio -->
+  <ion-icon id="btn-audio" name="pause-circle-sharp"></ion-icon>
+  
+  <style>
+	ion-icon {
+	  font-size: 48px;
+	  color: #f3b6b6;
+	}
+  
+	#btn-audio {
+	  position: fixed;
+	  bottom: 20px;
+	  right: 20px;
+	  font-size: 3rem;
+	  color: #f3b6b6;
+	  cursor: pointer;
+	  z-index: 1000;
+	  user-select: none;
+	  -webkit-tap-highlight-color: transparent;
+	  transition: transform 0.2s ease, color 0.2s ease;
+	}
+  
+	#btn-audio:hover {
+	  transform: scale(1.1);
+	  color: #f3b6b6;
+	}
+  </style>
+  
+  <script>
+	const audio = document.getElementById("cancion");
+	const icono = document.getElementById("btn-audio");
+	let reproduciendo = false;
+  
+	// Detecta interacción inicial con varios eventos
+	const iniciarAudio = () => {
+	  if (!reproduciendo) {
+		audio.play();
+		icono.setAttribute("name", "pause-circle-sharp");
+		reproduciendo = true;
+		removerListeners(); // para evitar repetir
+	  }
+	};
+  
+	const removerListeners = () => {
+	  document.removeEventListener("mousemove", iniciarAudio);
+	  document.removeEventListener("scroll", iniciarAudio);
+	  document.removeEventListener("touchstart", iniciarAudio);
+	};
+  
+	document.addEventListener("mousemove", iniciarAudio, { once: true });
+	document.addEventListener("scroll", iniciarAudio, { once: true });
+	document.addEventListener("touchstart", iniciarAudio, { once: true });
+  
+	// Botón de reproducción manual
+	icono.addEventListener("click", (event) => {
+	  event.stopPropagation(); // evita conflictos
+	  if (reproduciendo) {
+		audio.pause();
+		icono.setAttribute("name", "play-circle-sharp");
+		reproduciendo = false;
+	  } else {
+		audio.play();
+		icono.setAttribute("name", "pause-circle-sharp");
+		reproduciendo = true;
+	  }
+	});
+  </script>
+  
+  
+  
+		
 	  
 
 	<!--Imagen principal-->
@@ -87,46 +160,156 @@
 		</svg>
 	</div>
 
-	<!--Fotos-->
-	<div class="col-md-8 mx-auto" style="margin: 100px;">
-		<div id="carouselExample" class="carousel slide">
-			<div class="carousel-inner">
-			<div class="carousel-item active">
-				<div class="row">
-				<div class="col-4">
-					<img src="img/person/carousel1.jpeg" class="d-block w-100" alt="Foto 1">
-				</div>
-				<div class="col-4">
-					<img src="img/person/carousel2.jpeg" class="d-block w-100" alt="Foto 2">
-				</div>
-				<div class="col-4">
-					<img src="img/person/carousel3.jpeg" class="d-block w-100" alt="Foto 3">
-				</div>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<div class="row">
-				<div class="col-4">
-					<img src="img/person/carousel1.jpeg" class="d-block w-100" alt="Foto 4">
-				</div>
-				</div>
-			</div>
-			<!-- Agregá más items de a pares si querés -->
-			</div>
-		
-			<!-- controles -->
-			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			<span class="visually-hidden">Anterior</span>
-			</button>
-			<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			<span class="visually-hidden">Siguiente</span>
-			</button>
+
+
+	<div class="carousel-multi-wrapper">
+		<button class="carousel-control-prev custom-control" id="btnPrev">
+		  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		  <span class="visually-hidden">Anterior</span>
+		</button>
+	  
+		<div class="carousel-multi" id="carouselMulti">
+		  <img src="img/person/carousel1.jpeg" alt="Foto 1">
+		  <img src="img/person/carousel2.jpeg" alt="Foto 2">
+		  <img src="img/person/carousel3.jpeg" alt="Foto 3">
+		  <img src="img/person/carousel1.jpeg" alt="Foto 4">
+		  <img src="img/person/carousel2.jpeg" alt="Foto 5">
+		  <img src="img/person/carousel3.jpeg" alt="Foto 6">
 		</div>
-	</div>
+	  
+		<button class="carousel-control-next custom-control" id="btnNext">
+		  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		  <span class="visually-hidden">Siguiente</span>
+		</button>
+	  </div>
 	  
 
+	  
+	  <script>
+		document.getElementById("btnNext").addEventListener("click", () => {
+		  const carousel = document.getElementById("carouselMulti");
+		  const itemWidth = window.innerWidth < 768 ? carousel.offsetWidth : carousel.offsetWidth / 3;
+		  carousel.scrollBy({ left: itemWidth + 16, behavior: "smooth" });
+		});
+	  
+		document.getElementById("btnPrev").addEventListener("click", () => {
+		  const carousel = document.getElementById("carouselMulti");
+		  const itemWidth = window.innerWidth < 768 ? carousel.offsetWidth : carousel.offsetWidth / 3;
+		  carousel.scrollBy({ left: -itemWidth - 16, behavior: "smooth" });
+		});
+
+		const carousel = document.getElementById("carouselMulti");
+		const btnNext = document.getElementById("btnNext");
+		const btnPrev = document.getElementById("btnPrev");
+
+		btnNext.addEventListener("click", () => {
+		const itemWidth = window.innerWidth < 768 ? carousel.offsetWidth : carousel.offsetWidth / 3;
+		const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+		// Avanzamos
+		carousel.scrollBy({ left: itemWidth + 16, behavior: "smooth" });
+
+		// Esperamos un poco y luego verificamos si ya estamos al final
+		setTimeout(() => {
+			if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 1) {
+			carousel.scrollTo({ left: 0, behavior: "smooth" });
+			}
+		}, 400); // tiempo suficiente para que se complete el scroll
+		});
+
+		btnPrev.addEventListener("click", () => {
+		const itemWidth = window.innerWidth < 768 ? carousel.offsetWidth : carousel.offsetWidth / 3;
+
+		carousel.scrollBy({ left: -itemWidth - 16, behavior: "smooth" });
+
+		setTimeout(() => {
+			if (carousel.scrollLeft <= 0) {
+			const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+			carousel.scrollTo({ left: maxScroll, behavior: "smooth" });
+			}
+		}, 400);
+		});
+	  </script>
+	  
+
+<style>
+.carousel-multi-wrapper {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  margin: 40px auto;
+  padding: 0 40px;
+}
+
+.carousel-multi {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+}
+
+.carousel-multi::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.carousel-multi img {
+  flex: 0 0 auto;
+  width: calc(100% / 3 - 16px); /* 3 imágenes en desktop */
+  border-radius: 12px;
+}
+
+/* Mobile: una imagen completa */
+@media (max-width: 767px) {
+  .carousel-multi img {
+    width: 100%;
+  }
+}
+
+/* Botones flotantes transparentes */
+.custom-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent !important;
+  border: none;
+  padding: 0;
+  z-index: 10;
+  cursor: pointer;
+}
+
+#btnPrev {
+  left: 0;
+}
+
+#btnNext {
+  right: 0;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1); /* flechas blancas */
+}
+
+
+</style>
+
+<script>
+	const carousel = document.getElementById("carouselMulti");
+	const btnNext = document.getElementById("btnNext");
+	const btnPrev = document.getElementById("btnPrev");
+  
+	btnNext.addEventListener("click", () => {
+	  const itemWidth = window.innerWidth < 768 ? carousel.offsetWidth : carousel.offsetWidth / 3;
+	  carousel.scrollBy({ left: itemWidth + 16, behavior: "smooth" }); // + gap
+	});
+  
+	btnPrev.addEventListener("click", () => {
+	  const itemWidth = window.innerWidth < 768 ? carousel.offsetWidth : carousel.offsetWidth / 3;
+	  carousel.scrollBy({ left: -itemWidth - 16, behavior: "smooth" });
+	});
+  </script>
+  
 
 
 		<!--Destino-->
@@ -222,6 +405,106 @@
 			  </div>
 			</div>
 		</div>
+
+
+
+
+
+
+	  <!-- Sección 1 -->
+	<div class="section1">
+		<!--CONFIRMACION-->
+		<div class="container-fluid rose">
+			<div class="container text-center">
+				<div class="row">
+					<div class="col-md-6 mx-auto" style="padding: 20px;">
+						<img src="gif/gif_globos.gif" alt="Gif animado" class="img-fluid" width="150" height="150"/>
+						<div class="row" style="padding: 10px;">
+							<div class="col-md-12 mx-auto">
+							<p style="font-size:2rem !important;">CONFIRMACION DE ASISTENCIA</p>
+						</div>
+					</div>
+					<div class="row" style="padding: 10px; font-family: Allura;">
+						<div class="col-md-12 mx-auto">
+						<p style="font-size:2rem !important;">Espero que me acompañes...</p>    
+						</div>
+					</div>
+					<div class="row" style="padding: 10px;">
+						<div class="col-md-12 mx-auto">
+						<p style="font-size:1.2rem !important;">
+							Te pido que completes este formulario antes del 10/12/2025. <br>
+							Si fuiste invitado/a con un acompañante, <br>
+							<b><u>completar un formulario por persona</u></b>
+						</p>    
+						</div>
+					</div>
+					<div class="row" style="padding: 10px;">
+						<div class="col-md-12 mx-auto">
+						<a href="https://maps.app.goo.gl/uMTYkjfq72qdWgkE7" target="_blank" class="boton-mapa">
+							CONFIRMAR MI ASISTENCIA
+						</a>  
+						</div>
+					</div>
+					<div class="row" style="padding: 10px;">
+						<div class="col-md-12 mx-auto">
+							<a href="https://maps.app.goo.gl/uMTYkjfq72qdWgkE7" target="_blank" class="boton-mapa">
+								AGREGAR LA FIESTA A MI CALENDARIO
+							</a>  
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>  
+		</div>  
+	
+		<!-- Curva que conecta con sección 2 -->
+		<svg class="curve" viewBox="0 0 1440 100" preserveAspectRatio="none">
+		  <path d="M0,0 C480,100 960,0 1440,100 L1440,100 L0,100 Z" fill="#F3B6B6"></path>
+		</svg>
+	</div>
+	
+	  <!-- Sección 2 -->
+	  <div class="section2">
+
+		<div class="container-fluid rose3">
+			<div class="container text-center">
+				<div class="row">
+					<div class="col-md-12 mx-auto" style="padding: 20px;">
+						<a href="https://maps.app.goo.gl/uMTYkjfq72qdWgkE7" target="_blank" class="boton-album">
+							SUBIR FOTO
+						</a> 
+					</div>
+					<div class="col-md-12 mx-auto" style="padding: 20px;">
+						<p>
+							Revivamos cada momento <br>
+							de este día a través de tus ojos.<br>
+							Si sacas alguna foto durante la fiesta,<br>
+							podés subirla a este álbum<br>
+							compartido para que todos<br>
+							podamos disfrutarlas.<br>
+						</p>
+					</div>
+				</div>
+			</div>  
+		</div>  
+			
+	
+		<!-- Curva que conecta con sección 3 -->
+		<svg class="curve" viewBox="0 0 1440 100" preserveAspectRatio="none">
+		  <path d="M0,0 C480,100 960,0 1440,100 L1440,100 L0,100 Z" fill="#C38888"></path>
+		</svg>
+	  </div>
+	
+	  <!-- Sección 3 -->
+	  <div class="section3">
+		<h1>¿Venís?</h1>
+	  </div>
+
+
+
+	
+  
+	
 	
 
 	  <script>
@@ -268,7 +551,48 @@
 	  
 	  <style>
 
+
+.section1 {
+      background-color: #A56C6C;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .section2 {
+      background-color: #F3B6B6;
+      color: #1f2937;
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section3 {
+      background-color: #C38888;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      z-index: 1;
+      position: relative;
+    }
+
+    .curve {
+      display: block;
+      width: 100%;
+      height: auto;
+      line-height: 0;
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+    }
 		
+
+.curva-svg-inv {
+  transform: rotate(180deg);
+  display: block;
+}
 
 
 .colores-prohibidos {
@@ -333,21 +657,6 @@
 
 
 
-.btn-audio {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #A56C6C;
-  color: white;
-  border: none;
-  padding: 10px 14px;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  cursor: pointer;
-  z-index: 9999;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
 
 
 
@@ -387,7 +696,7 @@
 
 		.style-contador{
 			color:white;
-			font-size: 3rem;
+			font-size: 2rem;
 		}
 
 		.style-contador-letter{
@@ -406,6 +715,10 @@
 		}
 		.rose2 {
 			background-color: #C38888;
+			color:white;
+		}
+		.rose3 {
+			background-color: #f3b6b6;
 			color:white;
 		}
 		
@@ -465,7 +778,7 @@
 		font-weight: 500;
 		text-decoration: none;
 		border: 2px solid #F3B6B6; /* Rosa Bootstrap */
-		color: #F3B6B6;
+		color: white;
 		border-radius: 8px;
 		transition: all 0.3s ease;
 		background-color: transparent;
@@ -473,6 +786,46 @@
 
 		a.boton-mapa:hover {
 		background-color: #F3B6B6;
+		color: white;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+		}
+
+
+		a.boton-album {
+		display: inline-block;
+		padding: 12px 24px;
+		font-size: 1rem;
+		font-weight: 500;
+		text-decoration: none;
+		border: 2px solid #C38888; /* Rosa Bootstrap */
+		color: white;
+		border-radius: 8px;
+		transition: all 0.3s ease;
+		background-color: transparent;
+		}
+
+		a.boton-album:hover {
+		background-color: #C38888;
+		color: white;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+		}
+
+
+		a.boton-confirm {
+		display: inline-block;
+		padding: 12px 24px;
+		font-size: 1rem;
+		font-weight: 500;
+		text-decoration: none;
+		border: 2px solid #A56C6C; /* Rosa Bootstrap */
+		color: #A56C6C;
+		border-radius: 8px;
+		transition: all 0.3s ease;
+		background-color: transparent;
+		}
+
+		a.boton-confirm:hover {
+		background-color: #A56C6C;
 		color: white;
 		box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 		}
