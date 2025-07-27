@@ -50,7 +50,7 @@
 	</picture>
   
 	<!-- Barra de avance superpuesta -->
-	<input type="range" id="barra" value="0" min="0" step="1"
+	<input type="range" id="barra" value="0" min="0" step="1" max="100"
   style="
     position: absolute;
     bottom: 120px;
@@ -214,6 +214,8 @@
 		const audio = document.getElementById("cancion");
 		const btnAudio = document.getElementById("btn-audio");
 		const botonPlayPausa = document.getElementById("play-pausa");
+		const botonAnterior = document.getElementById("anterior");
+		const botonSiguiente = document.getElementById("siguiente");
 
 		btnAudio.addEventListener("click", () => {
 		if (audio.paused) {
@@ -244,6 +246,25 @@
 		btnAudio.setAttribute("name", "play-circle-sharp");
 		botonPlayPausa.setAttribute("name", "play-outline");
 		});
+
+		botonAnterior.addEventListener("click", () => {
+  audio.currentTime = Math.max(0, audio.currentTime - 5);
+});
+
+botonSiguiente.addEventListener("click", () => {
+  audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
+});
+
+audio.addEventListener("timeupdate", () => {
+  const progreso = (audio.currentTime / audio.duration) * 100;
+  document.getElementById("barra").value = progreso;
+});
+
+document.getElementById("barra").addEventListener("input", (e) => {
+  const nuevoTiempo = (e.target.value / 100) * audio.duration;
+  audio.currentTime = nuevoTiempo;
+});
+
 
   </script>
   
