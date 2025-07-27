@@ -18,20 +18,132 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- Audio -->
-<audio id="cancion" autoplay loop>
+<audio id="cancion">
 	<source src="audio/tu_cancion.mp3" type="audio/mp3">
   </audio>
+  
+  <!-- Botón de control -->
+  <ion-icon id="btn-audio" name="play-circle-sharp"
+  style="
+    font-size: 3rem;
+    color: #b94a63;
+    cursor: pointer;
+    position: fixed; /* ← Este cambio lo fija en la pantalla */
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000; /* Asegura que quede por encima del contenido */
+  ">
+</ion-icon>
+
 
   
   
-  <!-- Ícono control de audio -->
-  <ion-icon id="btn-audio" name="pause-circle-sharp"></ion-icon>
+<!-- Contenedor relativo para que todo flote sobre la imagen -->
+<div class="container-fluid p-0">
+	<picture>
+	  <!-- Imagen para escritorio -->
+	  <source media="(min-width: 768px)" srcset="img/invitacion_online1.jpg">
+	  
+	  <!-- Imagen para móviles -->
+	  <img src="img/pagina web_MOBILE.jpg" alt="Invitación"
+		   class="img-fluid" style="width: 100%; border-radius: 12px;">
+	</picture>
   
+	<!-- Barra de avance superpuesta -->
+	<input type="range" id="barra" value="0" min="0" step="1"
+  style="
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%; /* más corta */
+    height: 3px;
+    background: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+  ">
+
+  </div>
+
+  <!-- Asegurate de tener Font Awesome cargado -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<!-- Controles de reproducción sobre la imagen -->
+<div id="controles-musicales"
+  style="
+    position: absolute;
+    bottom: 60px; /* ajustá esta altura según dónde los querés */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 30px;
+    backdrop-filter: blur(4px);
+  ">
+  <ion-icon id="anterior" name="play-back-outline"
+    style="font-size: 2rem; color: #b94a63; cursor: pointer;"></ion-icon>
+	<ion-icon id="play-pausa" name="play-outline"
+	style="font-size: 2.3rem; color: #b94a63; cursor: pointer;"></ion-icon>	
+  <ion-icon id="siguiente" name="play-forward-outline"
+    style="font-size: 2rem; color: #b94a63; cursor: pointer;"></ion-icon>
+</div>
+
+
+
+  
+  
+  
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@6.0.3/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@6.0.3/dist/ionicons/ionicons.js"></script>
+  
+  <!-- Estilos visuales -->
   <style>
 	ion-icon {
 	  font-size: 48px;
 	  color: #f3b6b6;
 	}
+
+
+	#barra::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #b94a63, #b94a63);
+  height: 6px;
+  border-radius: 4px;
+  border: none;
+}
+
+#barra::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  background: #b94a63;
+  border-radius: 50%;
+  border: none;
+  margin-top: -4px;
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
+
+#barra::-moz-range-track {
+  background: linear-gradient(to right, #b94a63, #b94a63);
+  height: 6px;
+  border-radius: 4px;
+}
+
+#barra::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: #b94a63;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
+
   
 	#btn-audio {
 	  position: fixed;
@@ -50,73 +162,92 @@
 	  transform: scale(1.1);
 	  color: #f3b6b6;
 	}
+  
+	@media (min-width: 768px) {
+	  .custom-img {
+		max-width: 100%;
+		height: auto;
+		display: block;
+		margin: 0 auto;
+	  }
+	}
+
+	/* Línea visual de la barra */
+#barra::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #b94a63, #b94a63);
+  height: 6px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: none;
+}
+
+
+/* Equivalente para Firefox */
+#barra::-moz-range-track,
+#barra::-moz-range-thumb {
+  border: none;
+  box-shadow: none;
+}
+
+  
+	/* Firefox */
+	#barra::-moz-range-track {
+	  background: linear-gradient(to right, #b94a63, #b94a63);
+	  height: 6px;
+	  border-radius: 4px;
+	}
+  
+	#barra::-moz-range-thumb {
+	  width: 14px;
+	  height: 14px;
+	  background: #b94a63;
+	  border: none;
+	  border-radius: 50%;
+	  cursor: pointer;
+	}
+	
   </style>
   
+  <!-- Script completo -->
   <script>
-	const audio = document.getElementById("cancion");
-	const icono = document.getElementById("btn-audio");
-	let reproduciendo = false;
-  
-	// Detecta interacción inicial con varios eventos
-	const iniciarAudio = () => {
-	  if (!reproduciendo) {
-		audio.play();
-		icono.setAttribute("name", "pause-circle-sharp");
-		reproduciendo = true;
-		removerListeners(); // para evitar repetir
-	  }
-	};
-  
-	const removerListeners = () => {
-	  document.removeEventListener("mousemove", iniciarAudio);
-	  document.removeEventListener("scroll", iniciarAudio);
-	  document.removeEventListener("touchstart", iniciarAudio);
-	};
-  
-	document.addEventListener("mousemove", iniciarAudio, { once: true });
-	document.addEventListener("scroll", iniciarAudio, { once: true });
-	document.addEventListener("touchstart", iniciarAudio, { once: true });
-  
-	// Botón de reproducción manual
-	icono.addEventListener("click", (event) => {
-	  event.stopPropagation(); // evita conflictos
-	  if (reproduciendo) {
-		audio.pause();
-		icono.setAttribute("name", "play-circle-sharp");
-		reproduciendo = false;
-	  } else {
-		audio.play();
-		icono.setAttribute("name", "pause-circle-sharp");
-		reproduciendo = true;
-	  }
-	});
+
+		const audio = document.getElementById("cancion");
+		const btnAudio = document.getElementById("btn-audio");
+		const botonPlayPausa = document.getElementById("play-pausa");
+
+		btnAudio.addEventListener("click", () => {
+		if (audio.paused) {
+			audio.play();
+			btnAudio.setAttribute("name", "pause-circle-sharp");
+			botonPlayPausa.setAttribute("name", "pause-outline");
+		} else {
+			audio.pause();
+			btnAudio.setAttribute("name", "play-circle-sharp");
+			botonPlayPausa.setAttribute("name", "play-outline");
+		}
+		});
+
+		botonPlayPausa.addEventListener("click", () => {
+		if (audio.paused) {
+			audio.play();
+			botonPlayPausa.setAttribute("name", "pause-outline");
+			btnAudio.setAttribute("name", "pause-circle-sharp");
+		} else {
+			audio.pause();
+			botonPlayPausa.setAttribute("name", "play-outline");
+			btnAudio.setAttribute("name", "play-circle-sharp");
+		}
+		});
+
+		// Al terminar la canción, volver ambos íconos a "play"
+		audio.addEventListener("ended", () => {
+		btnAudio.setAttribute("name", "play-circle-sharp");
+		botonPlayPausa.setAttribute("name", "play-outline");
+		});
+
   </script>
   
   
-  
-		
-	  
-
-	<!--Imagen principal-->
-	<div class="container-fluid p-0">
-		<picture>
-			<source media="(min-width: 768px)" srcset="img/invitacion_online1.jpg">
-			<img src="img/pagina web_MOBILE.jpg" alt="Invitación" class="img-fluid custom-img">
-		  </picture>
-		  
-	</div>
-	  
-	<style>
-		@media (min-width: 768px) {
-  .custom-img {
-    max-width: 100%; /* o el tamaño que te funcione bien */
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
-}
-
-	</style>
 	  
 
 	<!--Contador-->
@@ -168,7 +299,7 @@
 	<!-- Curva decorativa como cierre -->
 	<div class="curva-svg-wrapper">
 		<svg viewBox="0 0 100 20" preserveAspectRatio="none" class="curva-svg">
-			<path d="M0,20 C50,0 50,0 100,20 L100,0 L0,0 Z" fill="#A56C6C" />
+			<path d="M0,20 C50,0 50,0 100,20 L100,0 L0,0 Z" fill="#b94a63" />
 		</svg>
 	</div>
 
@@ -331,10 +462,10 @@
 				<div class="col-md-6 mx-auto">
 				  <!-- Tu contenido centrado -->
 				  <img src="gif/gif_globos.gif" alt="Gif animado" class="img-fluid" width="150" height="150"/>
-				  <h4 class="mb-4">¡FIESTA!</h4>
-				  <h4 class="mb-4">San cayetano</h4>
-				  <h4 class="mb-4">Av. 44 esq. 30, La Plata</h4>
-				  <h4 class="mb-4">21:30</h4>
+				  <h4 class="mb-4 style-fiesta">¡FIESTA!</h4>
+				  <h4 class="mb-4 style-fiesta">San cayetano</h4>
+				  <h4 class="mb-4 style-fiesta">Av. 44 esq. 30, La Plata</h4>
+				  <h4 class="mb-4 style-fiesta">21:30</h4>
 				  <a href="https://maps.app.goo.gl/uMTYkjfq72qdWgkE7" target="_blank" class="boton-lugar">
 					  ¿Cómo llegar?
 				  </a>  
@@ -344,95 +475,119 @@
 			</div>
 		</div>
 
-		<div class="container-fluid rose2" style="padding: 30px;">
-			<div class="container text-center">
-				<div class="row">
-					<h1 style="font-family: Allura;">Te cuento</h1>
-					<h1 style="font-family: Allura;">todos los detalles...</h1>
-					<div class="accordion accordion-flush" id="accordionFlushExample">
-						<div class="accordion-item">
-						  <h2 class="accordion-header">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-							  ¿Qué me pongo?
-							</button>
-						  </h2>
-						  <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-							<div class="accordion-body">
-								<p>El dress code es: <b>elegante.</b></p>
-								<div class="container text-center">
-									<div class="row">
-										<div class="col-md-6 mx-auto colores-prohibidos">
-											<div class="color-circle negro"></div>
-											<div class="color-circle blanco"></div>
-											<div class="color-circle rojo"></div>
+		<div class="section1">
+			<div class="container-fluid rose2" style="padding: 30px;">
+				<div class="container text-center">
+					<div class="row">
+						<h1 style="font-family: Allura;">Te cuento</h1>
+						<h1 style="font-family: Allura;">todos los detalles...</h1>
+						<div class="accordion accordion-flush" id="accordionFlushExample">
+							<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+								¿Qué me pongo?
+								</button>
+							</h2>
+							<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+								<div class="accordion-body">
+									<p>El dress code es: <b>elegante.</b></p>
+									<div class="container text-center">
+										<div class="row">
+											<div class="col-md-6 mx-auto colores-prohibidos">
+												<div class="color-circle negro"></div>
+												<div class="color-circle blanco"></div>
+												<div class="color-circle rojo"></div>
+											</div>
+											<p class="nota"><b>*Por favor, evitar estos colores en cualquiera de sus tonalidades.</b>
+											</p>
 										</div>
-										<p class="nota"><b>*Por favor, evitar estos colores en cualquiera de sus tonalidades.</b>
-										</p>
 									</div>
 								</div>
 							</div>
-						  </div>
-						</div>
-						<div class="accordion-item">
-						  <h2 class="accordion-header">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-							  Si quieres regalarme algo
-							</button>
-						  </h2>
-						  <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-							<div class="accordion-body">
-								<p>El mejor regalo es tu presencia,
-									pero si deseas regalarme algo…</p>
-								
-								<p>DATOS BANCARIOS</p>
-								<p>Nombre del Titular: xxxxxxxxxxxxxxxx</p>
-								<p>CVU: xxxxxxxxxxxxxxxx</p>
-								<p>Alias: xxxxxxxxxxxxxxxx</p>
-								
-								<p>En el salón también habrá un buzón.</p>
 							</div>
-						  </div>
+							<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+								Si quieres regalarme algo
+								</button>
+							</h2>
+							<div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+								<div class="accordion-body">
+									<p>El mejor regalo es tu presencia,
+										pero si deseas regalarme algo…</p>
+									
+									<p>DATOS BANCARIOS</p>
+									<p>Nombre del Titular: xxxxxxxxxxxxxxxx</p>
+									<p>CVU: xxxxxxxxxxxxxxxx</p>
+									<p>Alias: xxxxxxxxxxxxxxxx</p>			
+									<p>En el salón también habrá un buzón.</p>
+								</div>
+							</div>
+							</div>
 						</div>
-					  </div>
+					</div>
 				</div>
+			
+				<svg class="curve" viewBox="0 0 1440 100" preserveAspectRatio="none">
+					<path d="M0,0 C480,100 960,0 1440,100 L1440,100 L0,100 Z" fill="#ffd7d7"></path>
+				</svg>
+
 			</div>
-		</div>
+</div>
 
 
 
 
-		<!--Destino-->
-		<div class="container-fluid" style="padding: 20px;">
-			<div class="container text-center">
-			  <div class="row">
-				<div class="col-md-6 mx-auto">
-				  <!-- Tu contenido centrado -->
-				  <img src="gif/gif_musica.gif" alt="Gif animado" class="img-fluid" width="150" height="150"/>
-				  <h1 class="mb-4" style="font-family: Allura;" >¡Hagamos juntos una fiesta inolvidable!</h1>
-				  <h4 class="mb-4">Ayudame a armar la lista de canciones</h4>
-				  <a target="" class="boton-tema">
-					  Agrega tu tema
-				  </a>  
+		
+
+
+
+		<!-- Sección 2 -->
+		<div class="section2">
+			
+
+			<div class="container-fluid rose3">
+				<div class="container text-center">
+					<div class="row">
+						<!--Destino-->
+						<div class="container-fluid" style="padding: 20px;">
+							<div class="container text-center">
+							<div class="row">
+								<div class="col-md-6 mx-auto">
+								<!-- Tu contenido centrado -->
+								<img src="gif/gif_musica.gif" alt="Gif animado" class="img-fluid" width="150" height="150"/>
+								<h1 class="mb-4" style="font-family: Allura;" >¡Hagamos juntos una fiesta inolvidable!</h1>
+								<h4 class="mb-4">Ayudame a armar la lista de canciones</h4>
+								<a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSeIdM1sQ8KXmakV4SWFd4uCUQM-X0x8nz2fDRUQNaQYBtiSOA/viewform?usp=dialog" class="boton-tema">
+									Agrega tu tema
+								</a>  
 					  
 				</div>
 			  </div>
 			</div>
 		</div>
-
-
-
+					</div>
+				</div>  
+			</div>  
+				
+		
+			<!-- Curva que conecta con sección 3 -->
+			<svg class="curve" viewBox="0 0 1440 100" preserveAspectRatio="none">
+			  <path d="M0,0 C480,100 960,0 1440,100 L1440,100 L0,100 Z" fill="#fff"></path>
+			</svg>
+		  </div>
 
 
 
 	  <!-- Sección 1 -->
-	<div class="section1">
+	<div class="asistencia">
 		<!--CONFIRMACION-->
-		<div class="container-fluid rose">
+		<div class="container-fluid">
 			<div class="container text-center">
-				<div class="row">
+				<div class="row letter-color-asist">
 					<div class="col-md-6 mx-auto" style="padding: 20px;">
-						<img src="gif/gif_globos.gif" alt="Gif animado" class="img-fluid" width="150" height="150"/>
-						<div class="row" style="padding: 10px;">
+						<img src="gif/gif_asistencia.gif" alt="Gif animado" class="img-fluid" width="150" height="150"/>
+						<div class="row " style="padding: 10px;">
 							<div class="col-md-12 mx-auto">
 							<p style="font-size:2rem !important;">CONFIRMACION DE ASISTENCIA</p>
 						</div>
@@ -453,14 +608,15 @@
 					</div>
 					<div class="row" style="padding: 10px;">
 						<div class="col-md-12 mx-auto">
-						<a href="https://maps.app.goo.gl/uMTYkjfq72qdWgkE7" target="_blank" class="boton-mapa">
+						<a href="https://docs.google.com/forms/d/e/1FAIpQLSd-QQLq35RRYUEhrU5bN3Zq6wYaeNgb4SqiRTILe4m2GnXE1w/viewform?usp=dialog" target="_blank" class="boton-mapa">
 							CONFIRMAR MI ASISTENCIA
 						</a>  
 						</div>
 					</div>
 					<div class="row" style="padding: 10px;">
 						<div class="col-md-12 mx-auto">
-							<a href="https://maps.app.goo.gl/uMTYkjfq72qdWgkE7" target="_blank" class="boton-mapa">
+							<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV+de+Ona&dates=20251228T000000Z/20251228T010000Z&details=Te+espero+para+festejar+mi+cumpleaños,+no+te+olvides!&location=44+Esq.+30
+							" target="_blank" class="boton-mapa">
 								AGREGAR LA FIESTA A MI CALENDARIO
 							</a>  
 						</div>
@@ -472,7 +628,7 @@
 	
 		<!-- Curva que conecta con sección 2 -->
 		<svg class="curve" viewBox="0 0 1440 100" preserveAspectRatio="none">
-		  <path d="M0,0 C480,100 960,0 1440,100 L1440,100 L0,100 Z" fill="#F3B6B6"></path>
+		  <path d="M0,0 C480,100 960,0 1440,100 L1440,100 L0,100 Z" fill="#ffd7d7"></path>
 		</svg>
 	</div>
 	
@@ -487,7 +643,7 @@
 							SUBIR FOTO
 						</a> 
 					</div>
-					<div class="col-md-12 mx-auto" style="padding: 20px;">
+					<div class="col-md-12 mx-auto letter-album" style="padding: 20px;">
 						<p>
 							Revivamos cada momento <br>
 							de este día a través de tus ojos.<br>
@@ -539,164 +695,160 @@
 		}, 1000);
 	  </script>
 	  
-	  <script>
-		const audio = document.getElementById("cancion");
-		const boton = document.getElementById("botonAudio");
-	  
-		boton.addEventListener("click", () => {
-		  if (audio.paused) {
-			audio.play();
-			boton.textContent = "⏸️";
-		  } else {
-			audio.pause();
-			boton.textContent = "▶️";
-		  }
-		});
-	  </script>
-	  
-	  <script>
-		document.addEventListener('click', function () {
-		  const audio = document.getElementById('cancion');
-		  audio.play();
-		}, { once: true }); // solo se ejecuta una vez
-	  </script>
-	  
 	  
 	  <style>
 
+		.letter-album{
+			color:#C38888
+		}
 
-.section1 {
-      background-color: #A56C6C;
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
-      position: relative;
-    }
+		.letter-color-asist{
+			color:#b94a63
+		}
 
-    .section2 {
-      background-color: #F3B6B6;
-      color: #1f2937;
-      padding: 60px 20px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
+		.style-fiesta {
+			color: #b94a63;
+		}
 
-    .section3 {
-      background-color: #C38888;
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
-      z-index: 1;
-      position: relative;
-    }
+		.asistencia{
+			background-color: #fff;
+			color: white;
+			padding: 60px 20px;
+			text-align: center;
+			position: relative;
+		}
 
-    .curve {
-      display: block;
-      width: 100%;
-      height: auto;
-      line-height: 0;
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-    }
-		
+		.section1 {
+			background-color: #A56C6C;
+			color: white;
+			padding: 60px 20px;
+			text-align: center;
+			position: relative;
+			}
 
-.curva-svg-inv {
-  transform: rotate(180deg);
-  display: block;
-}
+			.section2 {
+			background-color: #ffd7d7;
+			color: #1f2937;
+			padding: 60px 20px;
+			text-align: center;
+			position: relative;
+			z-index: 1;
+			}
 
+			.section3 {
+			background-color: #C38888;
+			color: white;
+			padding: 60px 20px;
+			text-align: center;
+			z-index: 1;
+			position: relative;
+			}
 
-.colores-prohibidos {
-  display: flex;
-  justify-content: center; /* centra horizontalmente */
-  gap: 10px;
-  margin: 20px 0;
-}
+			.curve {
+			display: block;
+			width: 100%;
+			height: auto;
+			line-height: 0;
+			position: absolute;
+			bottom: -1px;
+			left: 0;
+			}
+				
 
-.color-circle {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-}
-
-/* Colores prohibidos */
-.negro {
-  background-color: #F2D3BC;
-}
-
-.blanco {
-  background-color: #800040;
-  border: 2px solid gray; /* para que se vea sobre fondo blanco */
-}
-
-.rojo {
-  background-color: #FFB6C1;
-}
+		.curva-svg-inv {
+		transform: rotate(180deg);
+		display: block;
+		}
 
 
+		.colores-prohibidos {
+		display: flex;
+		justify-content: center; /* centra horizontalmente */
+		gap: 10px;
+		margin: 20px 0;
+		}
 
-.accordion-flush .accordion-item {
-  border-bottom: 2px solid white; /* pinta solo el borde inferior */
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  background-color: #C38888; /* si querés mantener el fondo rosa oscuro */
-  color: white;
-}
+		.color-circle {
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		border: 2px solid #fff;
+		}
 
-.accordion-button {
-  background-color: #C38888;
-  color: white;
-  box-shadow: none;
-}
+		/* Colores prohibidos */
+		.negro {
+		background-color: #F2D3BC;
+		}
 
-.accordion-button:not(.collapsed) {
-  background-color: #C38888;
-  color: white;
-  box-shadow: none;
-}
+		.blanco {
+		background-color: #800040;
+		}
 
-.accordion-button:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-.accordion-button::after {
-  filter: invert(1); /* invierte el color para que se vea blanca */
-}
+		.rojo {
+		background-color: #FFB6C1;
+		}
 
 
 
+		.accordion-flush .accordion-item {
+		border-bottom: 2px solid white; /* pinta solo el borde inferior */
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		background-color: #a56c6c; /* si querés mantener el fondo rosa oscuro */
+		color: white;
+		}
+
+		.accordion-button {
+		background-color: #a56c6c;
+		color: white;
+		box-shadow: none;
+		}
+
+		.accordion-button:not(.collapsed) {
+		background-color: #a56c6c;
+		color: white;
+		box-shadow: none;
+		}
+
+		.accordion-button:focus {
+		outline: none;
+		box-shadow: none;
+		}
+
+		.accordion-button::after {
+		filter: invert(1); /* invierte el color para que se vea blanca */
+		}
 
 
 
-.carousel-item img {
-	height: 600px;
-	object-fit: cover;
-	border-radius: 30px;
-}
 
 
-.bg-pink {
-  background-color: white;
-}
+
+		.carousel-item img {
+			height: 600px;
+			object-fit: cover;
+			border-radius: 30px;
+		}
 
 
-.curva-svg-wrapper {
-  width: 100%;
-  height: 60px;
-  overflow: hidden;
-  line-height: 0;
-}
+		.bg-pink {
+		background-color: white;
+		}
 
-.curva-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
+
+		.curva-svg-wrapper {
+		width: 100%;
+		height: 60px;
+		overflow: hidden;
+		line-height: 0;
+		}
+
+		.curva-svg {
+		width: 100%;
+		height: 100%;
+		display: block;
+		}
 
 
 
@@ -708,12 +860,12 @@
 		}
 
 		.style-contador{
-			color:white;
+			color:#ffd7d7;
 			font-size: 2rem;
 		}
 
 		.style-contador-letter{
-			color:white;
+			color:#ffd7d7;
 			font-size: 1rem;
 		}
 
@@ -723,15 +875,15 @@
 		}
 
 		.rose {
-			background-color: #A56C6C;
-			color:white;
+			background-color: #b94a63;
+			color:#ffd7d7;
 		}
 		.rose2 {
-			background-color: #C38888;
+			background-color: #a56c6c;
 			color:white;
 		}
 		.rose3 {
-			background-color: #f3b6b6;
+			background-color: #ffd7d7;
 			color:white;
 		}
 		
@@ -809,15 +961,15 @@
 		font-size: 1rem;
 		font-weight: 500;
 		text-decoration: none;
-		border: 2px solid #F3B6B6; /* Rosa Bootstrap */
-		color: #F3B6B6;
+		border: 2px solid #b94a63; /* Rosa Bootstrap */
+		color: #b94a63;
 		border-radius: 8px;
 		transition: all 0.3s ease;
 		background-color: transparent;
 		}
 
 		a.boton-tema:hover {
-		background-color: #F3B6B6;
+		background-color: #b94a63;
 		color: white;
 		box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 		}
@@ -828,15 +980,15 @@
 		font-size: 1rem;
 		font-weight: 500;
 		text-decoration: none;
-		border: 2px solid #F3B6B6; /* Rosa Bootstrap */
-		color: white;
+		border: 2px solid #b94a63; /* Rosa Bootstrap */
+		color: #b94a63;
 		border-radius: 8px;
 		transition: all 0.3s ease;
 		background-color: transparent;
 		}
 
 		a.boton-mapa:hover {
-		background-color: #F3B6B6;
+		background-color: #b94a63;
 		color: white;
 		box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 		}
@@ -849,7 +1001,7 @@
 		font-weight: 500;
 		text-decoration: none;
 		border: 2px solid #C38888; /* Rosa Bootstrap */
-		color: white;
+		color: #C38888;
 		border-radius: 8px;
 		transition: all 0.3s ease;
 		background-color: transparent;
