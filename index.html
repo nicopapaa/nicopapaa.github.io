@@ -50,18 +50,8 @@
 	</picture>
   
 	<!-- Barra de avance superpuesta -->
-	<input type="range" id="barra" value="0" min="0" step="1" max="100"
-  style="
-    position: absolute;
-    bottom: 120px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50%; /* más corta */
-    height: 3px;
-    background: transparent;
-    -webkit-appearance: none;
-    appearance: none;
-  ">
+	<input type="range" id="barra" value="0" min="0" step="1" max="100">
+
 
   </div>
 
@@ -69,29 +59,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <!-- Controles de reproducción sobre la imagen -->
-<div id="controles-musicales"
-  style="
-    position: absolute;
-    bottom: 60px; /* ajustá esta altura según dónde los querés */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px 20px;
-    border-radius: 30px;
-    backdrop-filter: blur(4px);
-  ">
-  <ion-icon id="anterior" name="play-back-outline"
-    style="font-size: 2rem; color: #b94a63; cursor: pointer;"></ion-icon>
-	<ion-icon id="play-pausa" name="play-outline"
-	style="font-size: 2.3rem; color: #b94a63; cursor: pointer;"></ion-icon>	
-  <ion-icon id="siguiente" name="play-forward-outline"
-    style="font-size: 2rem; color: #b94a63; cursor: pointer;"></ion-icon>
-</div>
-
+<div id="controles-musicales">
+	<ion-icon id="anterior" name="play-back-outline"></ion-icon>
+	<ion-icon id="play-pausa" name="play-outline"></ion-icon> 
+	<ion-icon id="siguiente" name="play-forward-outline"></ion-icon>
+  </div>
+  
 
 
   
@@ -107,6 +80,65 @@
 	  font-size: 48px;
 	  color: #f3b6b6;
 	}
+
+	#barra {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 3px;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* 🎯 Ajustes para móviles */
+@media (max-width: 768px) {
+  #barra {
+    bottom: 35%; /* sube la barra en móvil */
+    width: 70%;    /* más larga para facilitar el toque */
+  }
+}
+
+
+ /* 🎧 Estilos generales */
+#controles-musicales {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 30px;
+  backdrop-filter: blur(4px);
+  z-index: 100;
+}
+
+#controles-musicales ion-icon {
+  font-size: 2rem;
+  color: #b94a63;
+  cursor: pointer;
+}
+
+/* 📱 Estilos para móviles */
+@media (max-width: 768px) {
+  #controles-musicales {
+    bottom: 25%;
+    gap: 20px;
+    padding: 8px 16px;
+    border-radius: 20px;
+  }
+
+  #controles-musicales ion-icon {
+    font-size: 2.5rem;
+  }
+}
+
 
 
 	#barra::-webkit-slider-runnable-track {
