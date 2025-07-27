@@ -21,6 +21,8 @@
 <audio id="cancion" autoplay loop>
 	<source src="audio/tu_cancion.mp3" type="audio/mp3">
   </audio>
+
+  
   
   <!-- Ícono control de audio -->
   <ion-icon id="btn-audio" name="pause-circle-sharp"></ion-icon>
@@ -98,13 +100,23 @@
 	<!--Imagen principal-->
 	<div class="container-fluid p-0">
 		<picture>
-		  <!-- Imagen para pantallas grandes (Desktop) -->
-		  <source media="(min-width: 768px)" srcset="img/invitacion_online1.jpg">
-		  <!-- Imagen para móviles (Mobile) -->
-			<img src="img/pagina web_MOBILE.jpg" alt="Invitación" class="img-fluid fullscreen-img">
-		</picture>
+			<source media="(min-width: 768px)" srcset="img/invitacion_online1.jpg">
+			<img src="img/pagina web_MOBILE.jpg" alt="Invitación" class="img-fluid custom-img">
+		  </picture>
+		  
 	</div>
 	  
+	<style>
+		@media (min-width: 768px) {
+  .custom-img {
+    max-width: 100%; /* o el tamaño que te funcione bien */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+	</style>
 	  
 
 	<!--Contador-->
