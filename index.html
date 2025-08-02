@@ -370,7 +370,7 @@ document.getElementById("barra").addEventListener("input", (e) => {
 					<div class="row" style="font-family: Allura; font-size: 1.2rem;">
 						<div class="col-md-12 mx-auto">
 							<!-- Tu contenido centrado -->
-							<p>Un recorrido por estos 15 años</p>
+							<p style="color:#b94a63;">Un recorrido por estos 15 años</p>
 						</div>
 					</div>
 				</div>
@@ -531,22 +531,6 @@ document.getElementById("barra").addEventListener("input", (e) => {
 
 </style>
 
-<script>
-	const carousel = document.getElementById("carouselMulti");
-	const btnNext = document.getElementById("btnNext");
-	const btnPrev = document.getElementById("btnPrev");
-  
-	btnNext.addEventListener("click", () => {
-	  const itemWidth = window.innerWidth < 768 ? carousel.offsetWidth : carousel.offsetWidth / 3;
-	  carousel.scrollBy({ left: itemWidth + 16, behavior: "smooth" }); // + gap
-	});
-  
-	btnPrev.addEventListener("click", () => {
-	  const itemWidth = window.innerWidth < 768 ? carousel.offsetWidth : carousel.offsetWidth / 3;
-	  carousel.scrollBy({ left: -itemWidth - 16, behavior: "smooth" });
-	});
-  </script>
-  
 
 
 		<!--Destino-->
