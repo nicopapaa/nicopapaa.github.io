@@ -471,14 +471,19 @@ document.getElementById("barra").addEventListener("input", (e) => {
 
 .carousel-multi img {
   flex: 0 0 auto;
-  width: calc(70% / 3 - 16px); /* 3 imágenes en desktop */
+  width: calc(70% / 3 - 16px); /* achicamos el ancho */
+  height: 450px; /* altura fija */
+  object-fit: cover; /* recorta la imagen sin deformarla */
   border-radius: 12px;
 }
+
 
 /* Mobile: una imagen completa */
 @media (max-width: 767px) {
   .carousel-multi img {
     width: 50%;
+    height: 200px;
+    object-fit: cover;
   }
 }
 
@@ -894,15 +899,6 @@ document.getElementById("barra").addEventListener("input", (e) => {
 		}
 
 
-
-
-
-
-		.carousel-item img {
-			height: 600px;
-			object-fit: cover;
-			border-radius: 30px;
-		}
 
 
 		.bg-pink {
