@@ -367,10 +367,10 @@ document.getElementById("barra").addEventListener("input", (e) => {
 		<div class="container-fluid">
 			<div class="container text-center">
 				<div class="row">
-					<div class="row" style="padding: 40px; font-family: Allura;">
+					<div class="row" style="font-family: Allura; font-size: 1.2rem;">
 						<div class="col-md-12 mx-auto">
 							<!-- Tu contenido centrado -->
-							<h2>Un recorrido por estos 15 años</h2>
+							<p>Un recorrido por estos 15 años</p>
 						</div>
 					</div>
 				</div>
@@ -457,6 +457,15 @@ document.getElementById("barra").addEventListener("input", (e) => {
   padding: 0 40px;
 }
 
+.carousel-multi-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+
+
 .carousel-multi {
   display: flex;
   gap: 16px;
@@ -492,12 +501,19 @@ document.getElementById("barra").addEventListener("input", (e) => {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: transparent !important;
+  background-color: transparent;
   border: none;
-  padding: 0;
   z-index: 10;
   cursor: pointer;
 }
+
+@media (max-width: 767px) {
+  .custom-control {
+    top: 80px; /* ajustá este valor según la altura real de tus imágenes */
+    transform: translateY(0); /* ya no necesitamos centrar con transform */
+  }
+}
+
 
 #btnPrev {
   left: 0;
@@ -542,8 +558,8 @@ document.getElementById("barra").addEventListener("input", (e) => {
 				  <img src="gif/gif_globos.gif" alt="Gif animado" class="img-fluid" width="150" height="150"/>
 				  <h4 class="mb-4 style-fiesta">¡FIESTA!</h4>
 				  <h4 class="mb-4 style-fiesta">San cayetano</h4>
-				  <h4 class="mb-4 style-fiesta">Av. 44 esq. 30, La Plata</h4>
-				  <h4 class="mb-4 style-fiesta">21:30</h4>
+				  <h4 class="mb-4 style-fiesta">Av. 44 e/ 158 y 159, La Plata</h4>
+				  <h4 class="mb-4 style-fiesta">21:30 Hs.</h4>
 				  <a href="https://maps.app.goo.gl/uMTYkjfq72qdWgkE7" target="_blank" class="boton-lugar">
 					  ¿Cómo llegar?
 				  </a>  
