@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Curvas entre secciones</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    .section1 {
+      background-color: #A56C6C;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .section2 {
+      background-color: #F3B6B6;
+      color: #1f2937;
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section3 {
+      background-color: #EFC5C5;
+      color: #333;
+      padding: 60px 20px;
+      text-align: center;
+      z-index: 1;
+      position: relative;
+    }
+
+    .curve {
+      display: block;
+      width: 100%;
+      height: auto;
+      line-height: 0;
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sección 1 -->
+  <div class="section1">
+    <h1>Primera Sección</h1>
+    <p>Contenido principal con fondo vino.</p>
+
+    <!-- Curva que conecta con sección 2 -->
+    <svg class="curve" viewBox="0 0 1440 100" preserveAspectRatio="none">
+      <path d="M0,0 C480,100 960,0 1440,100 L1440,100 L0,100 Z" fill="#F3B6B6"></path>
+    </svg>
+  </div>
+
+  <!-- Sección 2 -->
+  <div class="section2">
+    <h1>Segunda Sección</h1>
+    <p>Contenido intermedio con fondo rosado claro.</p>
+
+    <!-- Curva que conecta con sección 3 -->
+    <svg class="curve" viewBox="0 0 1440 100" preserveAspectRatio="none">
+      <path d="M0,0 C480,100 960,0 1440,100 L1440,100 L0,100 Z" fill="#EFC5C5"></path>
+    </svg>
+  </div>
+
+  <!-- Sección 3 -->
+  <div class="section3">
+    <h1>Tercera Sección</h1>
+    <p>Último bloque con fondo rosa pastel. ¡Todo unido por curvas suaves y responsivas!</p>
+  </div>
+
+</body>
+</html>
